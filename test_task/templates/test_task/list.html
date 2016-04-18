@@ -1,0 +1,40 @@
+{% extends 'test_task/base.html' %}
+{% load custom_tags %}
+{% block title %}
+    List of all users
+{% endblock title %}
+{% block body %}
+    <a href="{% url 'register' %}">Register new user</a>
+    |
+    {% if user.is_authenticated %}
+        <a href="{% url 'edit' %}">Edit user</a>
+        |
+        <a href="{% url 'view' %}">View profile</a>
+    {% endif %}
+    {% if not user.is_authenticated %}
+        <a href="{% url 'login' %}">Log in</a>
+    {% endif %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Birthday</th>
+                <th>Eligible</th>
+                <th>Random Number</th>
+                <th>BizzFuzz</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in users %}
+                <tr>
+                    <td>{{ u.username }}</td>
+                    <td>{{ u.date_of_birth }}</td>
+                    <td>{% eligible u.date_of_birth %}</td>
+                    <td>{{ u.random_int }}</td>
+                    <td>{% bizz_fuzz u.random_int %}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'download' %}">Download CSV</a>
+{% endblock body %}

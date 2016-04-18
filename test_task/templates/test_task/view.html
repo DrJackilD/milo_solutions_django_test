@@ -1,0 +1,16 @@
+{% extends 'test_task/base.html' %}
+{% load custom_tags %}
+{% block title %}
+    View user
+{% endblock title %}
+{% block body %}
+    <h3>User's details</h3>
+    <dl>
+        <dt>Username</dt>
+        <dd>{{ user.username }}</dd>
+        <dt>Date of birth</dt>
+        <dd>{{ user.date_of_birth }}</dd>
+        <dt>Random integer</dt>
+        <dt>{{ user.random_int }}</dt>
+    </dl>
+{% endblock body %}
